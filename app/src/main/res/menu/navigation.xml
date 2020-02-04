@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/feed_item"
+        android:textColor="@color/white"
+        android:icon="@android:drawable/ic_menu_sort_by_size"
+        android:title="@string/feed_text" />
+    <item
+        android:id="@+id/add_item"
+        android:icon="@android:drawable/ic_menu_add"
+        android:textColor="@color/white"
+        android:title="@string/add_text" />
+    <item
+        android:id="@+id/perso_item"
+        android:icon="@android:drawable/btn_star"
+        android:textColor="@color/white"
+        android:title="@string/perso_text" />
+</menu>
