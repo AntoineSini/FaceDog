@@ -1,10 +1,16 @@
 <resources>
     <string name="app_name">FaceDog</string>
     <string name="connection_title">Connectez-vous !</string>
-    <string name="username">Username ou email</string>
+    <string name="username">Nom d\'utilisateur</string>
+    <string name="email">Email</string>
     <string name="password">Mot de passe</string>
     <string name="feed_text">Feed</string>
     <string name="add_text">Ajouter</string>
     <string name="perso_text">Perso</string>
-
+    <string name="confirm">Confirmer le mot de passe</string>
+    <string name="register">S\'inscrire</string>
+    <string name="no_account">Pas encore de compte ?</string>
+    <string name="clickhere">Cliquez ici !</string>
+    <string name="signin">Connexion</string>
+    <string name="registration_title">Remplissez le formulaire pour vous inscrire</string>
 </resources>
