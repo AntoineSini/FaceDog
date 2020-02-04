@@ -2,43 +2,50 @@ package fr.isen.facedog
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.activity_personal_page.*
 
 class PersonalPageActivity : AppCompatActivity() {
 
-    private lateinit var auth: DatabaseReference
+    private lateinit var database: DatabaseReference
+    private lateinit var auth: FirebaseAuth
 
-    val user = FirebaseAuth.getInstance().currentUser
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personal_page)
+        auth = FirebaseAuth.getInstance()
         accessInformations()
+        database = FirebaseDatabase.getInstance().reference
+        signOutButton.setOnClickListener {
+            signOutUser()
+        }
     }
 
     public override fun onStart() {
         super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
-        //val currentUser = auth.currentUser
-        //updateUI(currentUser)
+        val currentUser = auth.currentUser
+        if (currentUser == null){
+            signOutUser()
+        }
     }
 
-    fun accessInformations(){
-        /*auth = FirebaseDatabase.getReference("users")
-        user?.let {
-            // Name, email address, and profile photo Url
-            val name = user.displayName
-            val email = user.email
-            val photoUrl = user.photoUrl
+    private fun accessInformations(){
+        val menuListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot){
+                val user = dataSnapshot.getValue(User::class.java)
+            }
+            override fun onCancelled(databaseError: DatabaseError){
+                Log.w("loadPost:onCancelled", databaseError.toException())
+            }
+        }
+        database.addValueEventListener(menuListener)
+    }
 
-            // Check if user's email is verified
-            val emailVerified = user.isEmailVerified
-
-            // The user's ID, unique to the Firebase project. Do NOT use this value to
-            // authenticate with your backend server, if you have one. Use
-            // FirebaseUser.getToken() instead.
-            val uid = user.uid
-        }*/
+    fun signOutUser(){
+        auth.signOut()
+        //intent = Intent(this, ConnectionActivity::class.java)
+        startActivity(intent)
     }
 }
