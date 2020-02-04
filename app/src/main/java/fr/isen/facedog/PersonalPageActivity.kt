@@ -3,11 +3,13 @@ package fr.isen.facedog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class PersonalPageActivity : AppCompatActivity() {
 
-    private lateinit var auth: FirebaseAuth
-    //auth = FirebaseAuth.getInstance().reference()
+    private lateinit var auth: DatabaseReference
+
     val user = FirebaseAuth.getInstance().currentUser
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,11 +20,12 @@ class PersonalPageActivity : AppCompatActivity() {
     public override fun onStart() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
+        //val currentUser = auth.currentUser
         //updateUI(currentUser)
     }
 
     fun accessInformations(){
+        /*auth = FirebaseDatabase.getReference("users")
         user?.let {
             // Name, email address, and profile photo Url
             val name = user.displayName
@@ -36,6 +39,6 @@ class PersonalPageActivity : AppCompatActivity() {
             // authenticate with your backend server, if you have one. Use
             // FirebaseUser.getToken() instead.
             val uid = user.uid
-        }
+        }*/
     }
 }

@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "993771833084-a7gicmfb871hgefm7kusnv9k3a7g38g9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fr.isen.facedog",
+            "certificate_hash": "b1a296c20197e3bb090eb3b9a63ca291fb4bf4ea"
+          }
+        },
+        {
           "client_id": "993771833084-3kogdgks3nnet84eh4ccn8m1b8u0pn0f.apps.googleusercontent.com",
           "client_type": 3
         }
