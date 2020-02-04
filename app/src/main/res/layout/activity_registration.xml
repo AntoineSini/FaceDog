@@ -49,8 +49,7 @@
             android:id="@+id/emailTextEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/email"
-            android:inputType="text|textEmailAddress"/>
+            android:hint="@string/email" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -67,8 +66,7 @@
             android:id="@+id/passwordTextEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/password"
-            android:inputType="textPassword"/>
+            android:hint="@string/password" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -85,8 +83,7 @@
             android:id="@+id/confirmTextEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/confirm"
-            android:inputType="textPassword"/>
+            android:hint="@string/confirm" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
