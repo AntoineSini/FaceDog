@@ -24,8 +24,6 @@ class NewPostActivity : AppCompatActivity() {
     fun addToDatabase(firebaseData: DatabaseReference) {
 
         auth.currentUser?.uid
-
-
         val newPublication = Publication("2", "Test 3", "Antoiiiiiiiiine", auth.currentUser?.uid)
         val key = firebaseData.child("publication").push().key ?: ""
         newPublication.publication_id = key
