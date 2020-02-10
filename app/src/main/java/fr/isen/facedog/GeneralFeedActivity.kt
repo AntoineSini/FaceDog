@@ -8,8 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 
 class GeneralFeedActivity : AppCompatActivity() {
     lateinit var toolbar: ActionBar
@@ -26,10 +25,23 @@ class GeneralFeedActivity : AppCompatActivity() {
         //database part
         database = FirebaseDatabase.getInstance().reference
 
-        toolbar = supportActionBar!!
+        database.addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val post = dataSnapshot.getValue(Publication::class.java)
+                val key = database.child("publication").push().key ?: ""
+                newPublication.publication_id = key
+                database.child("publication").child(key).setValue(newPublication)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                //print error.message
+            }
+        })
+
+        /*toolbar = supportActionBar!!
         val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_nav_bar)
 
-        bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)*/
 
     }
 
