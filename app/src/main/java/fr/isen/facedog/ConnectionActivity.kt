@@ -16,7 +16,6 @@ class ConnectionActivity : AppCompatActivity() {
         setContentView(R.layout.activity_connection)
         //Initialize
         auth = FirebaseAuth.getInstance()
-
         signUpTextview.setOnClickListener{
             intent = Intent(this, RegistrationActivity::class.java)
             startActivity(intent)
@@ -31,7 +30,9 @@ class ConnectionActivity : AppCompatActivity() {
         val currentUser = auth.currentUser
         if (currentUser != null) {
             intent = Intent(this, GeneralFeedActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
+            finish()
         }
     }
 
@@ -43,6 +44,7 @@ class ConnectionActivity : AppCompatActivity() {
                 val user = auth.currentUser
                 intent = Intent(this, GeneralFeedActivity::class.java)
                 //intent.putExtra(user)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
             } else {
                 // If sign in fails, display a message to the user.
