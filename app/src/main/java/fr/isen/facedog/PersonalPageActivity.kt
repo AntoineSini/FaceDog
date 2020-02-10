@@ -1,5 +1,6 @@
 package fr.isen.facedog
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -10,7 +11,7 @@ import com.google.firebase.database.DatabaseReference
 import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class PersonalPageActivity : AppCompatActivity() {
@@ -33,11 +34,40 @@ class PersonalPageActivity : AppCompatActivity() {
                 //print error.message
             }
         })
-        /*accessInformations()
-        database = FirebaseDatabase.getInstance().reference
+        //accessInformations()
+        //database = FirebaseDatabase.getInstance().reference
+        val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_nav_bar)
+
+        bottomNavigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
         signOutButton.setOnClickListener {
-            signOutUser()
-        }*/
+            auth.signOut()
+            auth.addAuthStateListener {
+                intent = Intent(this, ConnectionActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+            }
+        }
+    }
+
+    private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId) {
+            R.id.add_item -> {
+                intent= Intent(this, NewPostActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            R.id.perso_item -> {
+                intent= Intent(this, PersonalPageActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            R.id.feed_item -> {
+                intent= Intent(this, GeneralFeedActivity::class.java)
+                startActivity(intent)
+                true
+            }
+        }
+        false
     }
 
     public override fun onStart() {

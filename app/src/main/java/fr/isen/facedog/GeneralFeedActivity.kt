@@ -18,34 +18,14 @@ class GeneralFeedActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_general_feed)
-
-        //authentication part
-        auth = FirebaseAuth.getInstance()
-
-        //database part
-        database = FirebaseDatabase.getInstance().reference
-
-        database.addListenerForSingleValueEvent(object: ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                /*val post = dataSnapshot.getValue(Publication::class.java)
-                val key = database.child("publication").push().key ?: ""
-                //newPublication.publication_id = key
-                database.child("publication").child(key).setValue(newPublication)*/
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                //print error.message
-            }
-        })
-
         toolbar = supportActionBar!!
-        //val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_nav_bar)
+        val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_nav_bar)
 
-        //bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        bottomNavigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
     }
 
-    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+    private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.add_item -> {
                 intent= Intent(this, NewPostActivity::class.java)
@@ -65,21 +45,5 @@ class GeneralFeedActivity : AppCompatActivity() {
         }
         false
     }
-
-
-    override fun onStart() {
-        super.onStart()
-        val currentUser = auth.currentUser
-
-        if(currentUser == null)
-        {
-            auth.signOut()
-            intent= Intent(this, ConnectionActivity::class.java)
-            startActivity(intent)
-        }
-    }
-
-
-
 }
 
