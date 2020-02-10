@@ -75,7 +75,7 @@ class NewPostActivity : AppCompatActivity() {
         path = id_publi + ".jpg"
 
 
-        val img_ref = storage_ref.child("${image_uri}")
+        val img_ref = storage_ref.child("")
         image_uri?.let{
             img_ref.child(path).putFile(it)
         }

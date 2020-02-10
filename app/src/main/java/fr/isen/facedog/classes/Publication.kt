@@ -4,7 +4,7 @@ import com.google.firebase.database.IgnoreExtraProperties
 
 @IgnoreExtraProperties
 
-data class Publication(
+class Publication(
     var id : String,
     var title: String?,
     var description: String?,
