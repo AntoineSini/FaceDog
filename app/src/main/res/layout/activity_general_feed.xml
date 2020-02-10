@@ -14,6 +14,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/navigation"/>
+        app:menu="@menu/navigation" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RecyclerFeed"
+        android:layout_width="409dp"
+        android:layout_height="669dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

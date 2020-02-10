@@ -17,11 +17,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ConnectionActivity" />
+        <activity android:name=".test"></activity>
+        <activity android:name=".NewPostActivity" />
         <activity android:name=".PersonalPageActivity" />
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".GeneralFeedActivity" />
-        <activity android:name=".NewPostActivity">
+        <activity android:name=".ConnectionActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

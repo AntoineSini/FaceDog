@@ -17,6 +17,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
+import fr.isen.facedog.classes.Publication
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 
@@ -65,8 +66,8 @@ class NewPostActivity : AppCompatActivity() {
         description = descriptionInputLayout.text.toString()
         val newPublication = Publication("1", title, description, auth.currentUser?.uid)
         val key = firebaseData.child("publication").push().key ?: ""
-        newPublication.publication_id = key
-        var id_publi = newPublication.publication_id.toString()
+        newPublication.id = key
+        var id_publi = newPublication.id.toString()
         firebaseData.child("publication").child(key).setValue(newPublication)
 
         val storage_ref = storage.reference
