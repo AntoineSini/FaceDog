@@ -4,21 +4,28 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_personal_page.*
 import com.google.firebase.database.DatabaseReference
 import com.google.android.material.bottomnavigation.BottomNavigationView
-
-
+import fr.isen.facedog.classes.Publication
+import kotlinx.android.synthetic.main.activity_general_feed.*
 
 
 class PersonalPageActivity : AppCompatActivity() {
 
     private lateinit var database: DatabaseReference
     private lateinit var auth: FirebaseAuth
+    private var layoutManager: RecyclerView.LayoutManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        var adapter: RecyclerAdapterFeed? = null
+        val publicationList = ArrayList<Publication>()
+        layoutManager = LinearLayoutManager(this)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personal_page)
         val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_nav_bar)
@@ -50,6 +57,10 @@ class PersonalPageActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
+        /*adapter = RecyclerAdapterFeed()
+        recyclerViewPersonalPosts.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        //adapter = RecyclerAdapterFeed(content = publicationList, listener = this)
+        recyclerViewPersonalPosts.adapter = adapter*/
     }
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
