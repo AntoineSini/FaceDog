@@ -22,23 +22,26 @@ class PersonalPageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personal_page)
+        val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_nav_bar)
+        bottomNavigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+
         auth = FirebaseAuth.getInstance()
+        var currentUser = auth.currentUser?.uid
         database = FirebaseDatabase.getInstance().reference
         database.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val post = dataSnapshot.getValue(User::class.java)
-                //Update UI
+                val user = User(currentUser, post?.username, post?.email)
+                val key = database.child("users").push().key ?: ""
+                database.child("users").child(key).setValue(user)
             }
 
             override fun onCancelled(error: DatabaseError) {
                 //print error.message
             }
         })
-        //accessInformations()
-        //database = FirebaseDatabase.getInstance().reference
-        val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_nav_bar)
 
-        bottomNavigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+
         signOutButton.setOnClickListener {
             auth.signOut()
             auth.addAuthStateListener {
@@ -89,9 +92,4 @@ class PersonalPageActivity : AppCompatActivity() {
         }
         database.addValueEventListener(menuListener)
     }
-
-    /*fun writeNewUser(userId: String, surname: String, email: String?) {
-        val user = User(userId, surname, email)
-        database.child("users").child(userId).setValue(user)
-    }*/
 }
