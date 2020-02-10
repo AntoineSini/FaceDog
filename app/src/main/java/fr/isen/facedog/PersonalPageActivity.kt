@@ -60,7 +60,7 @@ class PersonalPageActivity : AppCompatActivity() {
         database.addValueEventListener(menuListener)
     }
 
-    /*private fun writeNewUser(userId: String, surname: String, email: String?) {
+    /*fun writeNewUser(userId: String, surname: String, email: String?) {
         val user = User(userId, surname, email)
         database.child("users").child(userId).setValue(user)
     }*/
