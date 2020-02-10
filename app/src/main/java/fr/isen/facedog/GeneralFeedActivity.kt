@@ -19,17 +19,13 @@ class GeneralFeedActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_general_feed)
         toolbar = supportActionBar!!
-        buttonswitch.setOnClickListener{
-            auth.signOut()
-            auth.addAuthStateListener {
-                intent = Intent(this, ConnectionActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
-            }
-        }
+        val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_nav_bar)
+
+        bottomNavigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+
     }
 
-    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+    private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.add_item -> {
                 intent= Intent(this, NewPostActivity::class.java)
