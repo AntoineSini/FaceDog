@@ -25,6 +25,7 @@ class GeneralFeedActivity : AppCompatActivity(), RecyclerAdapterFeed.OnPublicati
         bottomNavigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
         recyclerAndDatabaseHandler()
+        
     }
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->

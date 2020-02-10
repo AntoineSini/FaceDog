@@ -12,5 +12,11 @@
     <string name="no_account">Pas encore de compte ?</string>
     <string name="clickhere">Cliquez ici !</string>
     <string name="signin">Connexion</string>
+    <string name="newPostTextView">Nouvelle publication</string>
+    <string name="pictureButton">Ajouter une photo</string>
+    <string name="titleInputLayout">Titre</string>
+    <string name="descriptionInputLayout">Description</string>
+    <string name="addTextButton">Publier</string>
+    <string name="add_picture_text_view">Ajouter une photo</string>
     <string name="registration_title">Remplissez le formulaire pour vous inscrire</string>
 </resources>
