@@ -3,8 +3,9 @@ package fr.isen.facedog
 import com.google.firebase.database.IgnoreExtraProperties
 
 @IgnoreExtraProperties
-class User {
-    var userId: String? = null
-    var username: String? = null
-    var email: String? = null
-}
+
+data class User (
+    var user_id: String = "",
+    var username: String = "",
+    var email: String = ""
+)

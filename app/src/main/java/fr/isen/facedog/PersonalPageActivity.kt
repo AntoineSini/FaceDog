@@ -8,10 +8,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_personal_page.*
 import com.google.firebase.database.DatabaseReference
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import com.google.android.material.bottomnavigation.BottomNavigationView
+
+
 
 
 class PersonalPageActivity : AppCompatActivity() {
@@ -22,23 +21,27 @@ class PersonalPageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personal_page)
+        val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_nav_bar)
+        bottomNavigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().reference
+        //val key = database.child("users").push().key ?: ""
         database.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val post = dataSnapshot.getValue(User::class.java)
-                //Update UI
+                val firebaseUser = FirebaseAuth.getInstance().currentUser
+                var currentUser = auth.currentUser?.uid
+                var email: String? = auth.currentUser?.email
+                var username: String? = auth.currentUser?.displayName
+                textViewUsername.text = "${email}"
+                textViewDescription.text = "${username}"
             }
 
             override fun onCancelled(error: DatabaseError) {
                 //print error.message
             }
         })
-        //accessInformations()
-        //database = FirebaseDatabase.getInstance().reference
-        val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_nav_bar)
 
-        bottomNavigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
         signOutButton.setOnClickListener {
             auth.signOut()
             auth.addAuthStateListener {
@@ -77,21 +80,4 @@ class PersonalPageActivity : AppCompatActivity() {
             auth.signOut()
         }
     }
-
-    private fun accessInformations(){
-        val menuListener = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot){
-                val user = dataSnapshot.getValue(User::class.java)
-            }
-            override fun onCancelled(databaseError: DatabaseError){
-                Log.w("loadPost:onCancelled", databaseError.toException())
-            }
-        }
-        database.addValueEventListener(menuListener)
-    }
-
-    /*fun writeNewUser(userId: String, surname: String, email: String?) {
-        val user = User(userId, surname, email)
-        database.child("users").child(userId).setValue(user)
-    }*/
 }
