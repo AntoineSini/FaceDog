@@ -27,10 +27,10 @@ class GeneralFeedActivity : AppCompatActivity() {
 
         database.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val post = dataSnapshot.getValue(Publication::class.java)
+                /*val post = dataSnapshot.getValue(Publication::class.java)
                 val key = database.child("publication").push().key ?: ""
-                newPublication.publication_id = key
-                database.child("publication").child(key).setValue(newPublication)
+                //newPublication.publication_id = key
+                database.child("publication").child(key).setValue(newPublication)*/
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -38,10 +38,10 @@ class GeneralFeedActivity : AppCompatActivity() {
             }
         })
 
-        /*toolbar = supportActionBar!!
-        val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_nav_bar)
+        toolbar = supportActionBar!!
+        //val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_nav_bar)
 
-        bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)*/
+        //bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
     }
 
