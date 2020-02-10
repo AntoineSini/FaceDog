@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
+import fr.isen.facedog.classes.Publication
 
 class NewPostActivity : AppCompatActivity() {
 
@@ -26,9 +27,14 @@ class NewPostActivity : AppCompatActivity() {
         auth.currentUser?.uid
 
 
-        val newPublication = Publication("2", "Test 3", "Antoiiiiiiiiine", auth.currentUser?.uid)
+        val newPublication = Publication(
+            "2",
+            "Test 3",
+            "Antoiiiiiiiiine",
+            auth.currentUser?.uid
+        )
         val key = firebaseData.child("publication").push().key ?: ""
-        newPublication.publication_id = key
+        newPublication.id = key
         firebaseData.child("publication").child(key).setValue(newPublication)
     }
 }
