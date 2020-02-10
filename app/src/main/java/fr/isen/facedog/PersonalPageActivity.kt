@@ -1,11 +1,18 @@
 package fr.isen.facedog
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_personal_page.*
+import com.google.firebase.database.DatabaseReference
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import com.google.android.material.bottomnavigation.BottomNavigationView
+
 
 class PersonalPageActivity : AppCompatActivity() {
 
@@ -16,18 +23,58 @@ class PersonalPageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personal_page)
         auth = FirebaseAuth.getInstance()
-        accessInformations()
         database = FirebaseDatabase.getInstance().reference
+        database.addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val post = dataSnapshot.getValue(User::class.java)
+                //Update UI
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                //print error.message
+            }
+        })
+        //accessInformations()
+        //database = FirebaseDatabase.getInstance().reference
+        val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_nav_bar)
+
+        bottomNavigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
         signOutButton.setOnClickListener {
-            signOutUser()
+            auth.signOut()
+            auth.addAuthStateListener {
+                intent = Intent(this, ConnectionActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+            }
         }
+    }
+
+    private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId) {
+            R.id.add_item -> {
+                intent= Intent(this, NewPostActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            R.id.perso_item -> {
+                intent= Intent(this, PersonalPageActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            R.id.feed_item -> {
+                intent= Intent(this, GeneralFeedActivity::class.java)
+                startActivity(intent)
+                true
+            }
+        }
+        false
     }
 
     public override fun onStart() {
         super.onStart()
         val currentUser = auth.currentUser
         if (currentUser == null){
-            signOutUser()
+            auth.signOut()
         }
     }
 
@@ -43,9 +90,8 @@ class PersonalPageActivity : AppCompatActivity() {
         database.addValueEventListener(menuListener)
     }
 
-    fun signOutUser(){
-        auth.signOut()
-        //intent = Intent(this, ConnectionActivity::class.java)
-        startActivity(intent)
-    }
+    /*fun writeNewUser(userId: String, surname: String, email: String?) {
+        val user = User(userId, surname, email)
+        database.child("users").child(userId).setValue(user)
+    }*/
 }

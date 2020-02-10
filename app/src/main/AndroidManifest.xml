@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="fr.isen.facedog">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo"
@@ -9,9 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PersonalPageActivity"></activity>
-        <activity android:name=".RegistrationActivity"></activity>
-        <activity android:name=".GeneralFeedActivity"></activity>
+        <activity android:name=".NewPostActivity" />
+        <activity android:name=".PersonalPageActivity" />
+        <activity android:name=".RegistrationActivity" />
+        <activity android:name=".GeneralFeedActivity" />
         <activity android:name=".ConnectionActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +23,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-
     </application>
 
 </manifest>
