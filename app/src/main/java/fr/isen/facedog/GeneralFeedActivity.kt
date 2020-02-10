@@ -19,18 +19,15 @@ class GeneralFeedActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_general_feed)
-
-        //authentication part
-        auth = FirebaseAuth.getInstance()
-
-        //database part
-        database = FirebaseDatabase.getInstance().reference
-
         toolbar = supportActionBar!!
-        val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_nav_bar)
-
-        bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-
+        buttonswitch.setOnClickListener{
+            auth.signOut()
+            auth.addAuthStateListener {
+                intent = Intent(this, ConnectionActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+            }
+        }
     }
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -53,21 +50,5 @@ class GeneralFeedActivity : AppCompatActivity() {
         }
         false
     }
-
-
-    override fun onStart() {
-        super.onStart()
-        val currentUser = auth.currentUser
-
-        if(currentUser == null)
-        {
-            auth.signOut()
-            intent= Intent(this, ConnectionActivity::class.java)
-            startActivity(intent)
-        }
-    }
-
-
-
 }
 
