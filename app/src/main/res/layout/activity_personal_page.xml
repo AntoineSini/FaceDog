@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
         android:layout_marginEnd="16dp"
-        android:text="Button"
+        android:text="Deconnexion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
