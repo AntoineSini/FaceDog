@@ -36,12 +36,12 @@ class PersonalPageActivity : AppCompatActivity() {
         database.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val post = dataSnapshot.getValue(User::class.java)
-                val firebaseUser = FirebaseAuth.getInstance().currentUser
                 var currentUser = auth.currentUser?.uid
                 var email: String? = auth.currentUser?.email
                 var username: String? = auth.currentUser?.displayName
                 textViewUsername.text = "${email}"
                 textViewDescription.text = "${username}"
+
             }
 
             override fun onCancelled(error: DatabaseError) {
