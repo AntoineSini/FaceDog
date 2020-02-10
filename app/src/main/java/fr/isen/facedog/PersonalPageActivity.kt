@@ -22,7 +22,7 @@ class PersonalPageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personal_page)
         auth = FirebaseAuth.getInstance()
-
+        
         /*database.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val post = dataSnapshot.getValue(User::class.java)
