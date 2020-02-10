@@ -22,19 +22,18 @@ class PersonalPageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personal_page)
         auth = FirebaseAuth.getInstance()
-        
-        /*database.addListenerForSingleValueEvent(object: ValueEventListener {
+
+        database.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val post = dataSnapshot.getValue(User::class.java)
-                post?.username.toString()
-                post?.email.toString()
+                //Update UI
             }
 
             override fun onCancelled(error: DatabaseError) {
                 //print error.message
             }
         })
-        accessInformations()
+        /*accessInformations()
         database = FirebaseDatabase.getInstance().reference
         signOutButton.setOnClickListener {
             signOutUser()
@@ -59,5 +58,10 @@ class PersonalPageActivity : AppCompatActivity() {
             }
         }
         database.addValueEventListener(menuListener)
+    }
+
+    private fun writeNewUser(userId: String, surname: String, email: String?) {
+        val user = User(userId, surname, email)
+        database.child("users").child(userId).setValue(user)
     }
 }
