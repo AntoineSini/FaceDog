@@ -22,7 +22,7 @@ class PersonalPageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personal_page)
         auth = FirebaseAuth.getInstance()
-
+        database = FirebaseDatabase.getInstance().reference
         database.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val post = dataSnapshot.getValue(User::class.java)
@@ -60,8 +60,8 @@ class PersonalPageActivity : AppCompatActivity() {
         database.addValueEventListener(menuListener)
     }
 
-    private fun writeNewUser(userId: String, surname: String, email: String?) {
+    /*private fun writeNewUser(userId: String, surname: String, email: String?) {
         val user = User(userId, surname, email)
         database.child("users").child(userId).setValue(user)
-    }
+    }*/
 }
